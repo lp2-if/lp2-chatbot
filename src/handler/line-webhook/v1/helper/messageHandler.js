@@ -42,7 +42,7 @@ const getCurrentStatus = () => {
         .then((result) => {
             result = result.body;
             var messages = '';
-            if (result.now[0].jumlah) {
+            if (result.now[0].jumlah == '0') {
                 messages = 'LP2 sedang tidak dipakai, silahkan datang ke LP2. Jangan berisik dan meninggalkan sampah ya :)';
             } else {
                 messages = 'LP2 sedang dipakai untuk ' + result.now[0].nama_kegiatan + ' sampai ' + result.now[0].waktu_selesai_permohonan_peminjaman;
