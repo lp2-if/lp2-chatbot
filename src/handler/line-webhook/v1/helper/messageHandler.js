@@ -34,7 +34,15 @@ module.exports = (event) => {
         }
     }
 
-    return client.replyMessage(event.replyToken, messageGenerator.dummyMessage());
+    if (event.source.type == 'user') {
+        const messages = {
+            type: 'text',
+            text: messageGenerator.dummyMessage()
+        };
+        return client.replyMessage(event.replyToken, messages);
+    }
+
+    return Bluebird.resolve(null);
 };
 
 const getCurrentStatus = () => {

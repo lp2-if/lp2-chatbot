@@ -11,7 +11,10 @@ module.exports = (event) => {
     return client.getProfile(event.source.userId)
         .then((profile) => {
             const firstName = _.split(profile.displayName, ' ');
-            const welcomeMessage = messageGenerator.welcomeMessage(firstName);
-            return client.replyMessage(event.replyToken, welcomeMessage);
+            const messages = {
+                type: 'text',
+                text: messageGenerator.welcomeMessage(firstName)
+            };
+            return client.replyMessage(event.replyToken, messages);
         });
 };
