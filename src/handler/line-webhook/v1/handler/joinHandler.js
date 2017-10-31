@@ -1,5 +1,7 @@
 const line = require('@line/bot-sdk');
-const messageGenerator = require('../../../../utils/textGenerator');
+const request = require('superagent');
+const textGenerator = require('../../../../utils/textGenerator');
+const messageGenerator = require('../../../../utils/messageGenerator');
 const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.CHANNEL_SECRET
@@ -7,9 +9,13 @@ const config = {
 const client = new line.Client(config);
 
 module.exports = (event) => {
-    const messages = {
-        type: 'text',
-        text: messageGenerator.joinMessage()
-    };
-    return client.replyMessage(event.replyToken, messages);
+    const messages = [];
+    messages.push(messageGenerator.text(textGenerator.joinMessage()));
+    return request.get('https://quotes.rest/qod')
+        .then((result) => {
+            var quotes = result.body.contents.quotes.quote;
+            quotes += '\n' + result.body.contents.quotes.author;
+            messages.push(messageGenerator.text(quotes));
+            return client.replyMessage(event.replyToken, messages);
+        });
 };
