@@ -14,7 +14,7 @@ module.exports = (event) => {
     return request.get('https://quotes.rest/qod')
         .then((result) => {
             var quotes = result.body.contents.quotes[0].quote;
-            quotes += '\n' + result.body.contents.quotes[0].author;
+            quotes += '\n- ' + result.body.contents.quotes[0].author;
             messages.push(messageGenerator.text(quotes));
             return client.replyMessage(event.replyToken, messages);
         });
