@@ -6,6 +6,7 @@ const helpMessage = () => {
     var messages = 'Berikut daftar perintah yang saat ini ada: ';
     messages += '\n/help untuk menampilkan daftar perintah';
     messages += '\n/now untuk mengecek apakah LP2 sedang digunakan';
+    messages += '\n/bye untuk kick bot dari group';
     return messages;
 };
 

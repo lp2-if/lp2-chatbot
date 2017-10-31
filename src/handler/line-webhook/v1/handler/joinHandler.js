@@ -1,5 +1,4 @@
 const line = require('@line/bot-sdk');
-const _ = require('lodash');
 const messageGenerator = require('../../../../utils/textGenerator');
 const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,

@@ -1,9 +1,9 @@
 const Bluebird = require('bluebird');
 const _ = require('lodash');
 
-const messageHandler = require('./helper/messageHandler');
-const followHandler = require('./helper/followHandler');
-const joinHandler = require('./helper/joinHandler');
+const messageHandler = require('./handler/messageHandler');
+const followHandler = require('./handler/followHandler');
+const joinHandler = require('./handler/joinHandler');
 
 module.exports = (req, res) => {
     Bluebird.all(_.map(req.body.events, handleEvent))
