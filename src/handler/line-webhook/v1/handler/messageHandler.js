@@ -51,13 +51,13 @@ const adminGetIdHandler = (event) => {
 const nowHandler = (event) => {
     return getCurrentStatus()
         .then((result) => {
-            const messages = messageGenerator(result);
+            const messages = messageGenerator.text(result);
             return client.replyMessage(event.replyToken, messages);
         });
 };
 
 const byeHandler = (event) => {
-    const messages = messageGenerator(textGenerator.byeMessage());
+    const messages = messageGenerator.text(textGenerator.byeMessage());
     return client.replyMessage(event.replyToken, messages)
         .then(() => {
             if (event.source.type == 'group') {
@@ -70,7 +70,7 @@ const byeHandler = (event) => {
 };
 
 const helpHandler = (event) => {
-    const messages = messageGenerator(textGenerator.helpMessage());
+    const messages = messageGenerator.text(textGenerator.helpMessage());
     return client.replyMessage(event.replyToken, messages);
 };
 
