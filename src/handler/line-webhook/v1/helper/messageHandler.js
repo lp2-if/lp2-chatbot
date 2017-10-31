@@ -40,7 +40,7 @@ module.exports = (event) => {
 const getCurrentStatus = () => {
     return request.get('http://reservasi.lp2.if.its.ac.id/feeder/Laboratorium%20Pemrograman%202')
         .then((result) => {
-            console.log(result);
+            result = result.body;
             var messages = '';
             if (result.now[0].jumlah) {
                 messages = 'LP2 sedang tidak dipakai, silahkan datang ke LP2. Jangan berisik dan meninggalkan sampah ya :)';
