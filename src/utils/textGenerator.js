@@ -13,7 +13,15 @@ const byeMessage = () => {
     var messages = 'Sampai jumpa!';
     messages += '\nJangan lupa kelas :p';
     return messages;
-}
+};
+
+const joinMessage = () => {
+    var messages = 'Halo semua :)';
+    messages += '\nTerima kasih sudah mengundang saya';
+    messages += '\nKetik /help untuk menampilkan menu';
+    messages += '\nHave a good day :D';
+    return messages;
+};
 
 const dummyMessage = () => {
     var messages = 'Silahkan tekan /help untuk menampilkan menu';
@@ -27,3 +35,4 @@ exports.welcomeMessage = welcomeMessage;
 exports.helpMessage = helpMessage;
 exports.dummyMessage = dummyMessage;
 exports.byeMessage = byeMessage;
+exports.joinMessage = joinMessage;
