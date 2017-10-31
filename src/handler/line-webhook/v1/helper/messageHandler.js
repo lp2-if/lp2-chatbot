@@ -24,6 +24,20 @@ module.exports = (event) => {
                 });
         }
 
+        if (message.text.startsWith('/bye') && (event.source.type == 'group' || event.source.type == 'room')) {
+            const messages = {
+                type: 'text',
+                text: messageGenerator.byeMessage()
+            };
+            client.replyMessage(event.replyToken, messages);
+            if (event.source.type == 'group') {
+                var groupId = event.source.groupId;
+                return client.leaveGroup(groupId);
+            }
+            var roomId = event.source.roomId;
+            return client.leaveRoom(roomId);
+        }
+
         if (message.text.startsWith('/help')) {
             const result = messageGenerator.helpMessage();
             const messageObject = {

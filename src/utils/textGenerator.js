@@ -9,6 +9,12 @@ const helpMessage = () => {
     return messages;
 };
 
+const byeMessage = () => {
+    var messages = 'Sampai jumpa!';
+    messages += '\nJangan lupa kelas :p';
+    return messages;
+}
+
 const dummyMessage = () => {
     var messages = 'Silahkan tekan /help untuk menampilkan menu';
     messages += '\nBuanglah sampah pada tempatnya ya :p';
@@ -20,3 +26,4 @@ const dummyMessage = () => {
 exports.welcomeMessage = welcomeMessage;
 exports.helpMessage = helpMessage;
 exports.dummyMessage = dummyMessage;
+exports.byeMessage = byeMessage;
