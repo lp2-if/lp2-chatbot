@@ -29,13 +29,15 @@ module.exports = (event) => {
                 type: 'text',
                 text: messageGenerator.byeMessage()
             };
-            client.replyMessage(event.replyToken, messages);
-            if (event.source.type == 'group') {
-                var groupId = event.source.groupId;
-                return client.leaveGroup(groupId);
-            }
-            var roomId = event.source.roomId;
-            return client.leaveRoom(roomId);
+            return client.replyMessage(event.replyToken, messages)
+                .then(() => {
+                    if (event.source.type == 'group') {
+                        var groupId = event.source.groupId;
+                        return client.leaveGroup(groupId);
+                    }
+                    var roomId = event.source.roomId;
+                    return client.leaveRoom(roomId);
+                });
         }
 
         if (message.text.startsWith('/help')) {
