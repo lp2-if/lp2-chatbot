@@ -66,11 +66,11 @@ const dateHandler = (event) => {
             const scheduleList = result.body.kegiatan;
             var scheduleMessage = '';
             _.forEach(scheduleList, (schedule) => {
-                scheduleMessage += 'Nama kegiatan : ' + schedule.nama_kegiatan;
+                scheduleMessage += '\nNama kegiatan : ' + schedule.nama_kegiatan;
                 scheduleMessage += '\nWaktu mulai   : ' +schedule.waktu_mulai;
                 scheduleMessage += '\nWaktu selesai : ' + schedule.waktu_selesai + '\n';
-                messages.push(messageGenerator.text(scheduleMessage));
             });
+            messages.push(messageGenerator.text(scheduleMessage));
             return client.replyMessage(event.replyToken, messages);
         })
         .catch(() => {
