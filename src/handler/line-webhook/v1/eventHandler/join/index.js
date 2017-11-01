@@ -1,12 +1,7 @@
-const line = require('@line/bot-sdk');
 const request = require('superagent');
+const lineClient = require('../../../../singleton/lineClient');
 const textGenerator = require('../../../../utils/textGenerator');
 const messageGenerator = require('../../../../utils/messageGenerator');
-const config = {
-    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-    channelSecret: process.env.CHANNEL_SECRET
-};
-const client = new line.Client(config);
 
 module.exports = (event) => {
     const messages = [];
@@ -16,6 +11,6 @@ module.exports = (event) => {
             var quotes = result.body.contents.quotes[0].quote;
             quotes += '\n- ' + result.body.contents.quotes[0].author;
             messages.push(messageGenerator.text(quotes));
-            return client.replyMessage(event.replyToken, messages);
+            return lineClient.replyMessage(event.replyToken, messages);
         });
 };

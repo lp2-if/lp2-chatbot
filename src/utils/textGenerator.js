@@ -27,7 +27,7 @@ const joinMessage = () => {
     return messages;
 };
 
-const dummyMessage = () => {
+const defaultMessage = () => {
     var messages = 'Silahkan tekan /help untuk menampilkan menu';
     messages += '\nBuanglah sampah pada tempatnya ya :p';
     messages += '\nRapikan kursi setelah dipakai ya ;)';
@@ -57,12 +57,21 @@ const unavailableMessage = (name, until) => {
     return messages;
 };
 
-exports.welcomeMessage = welcomeMessage;
-exports.helpMessage = helpMessage;
-exports.dummyMessage = dummyMessage;
-exports.byeMessage = byeMessage;
-exports.joinMessage = joinMessage;
-exports.reserveMessage = reserveMessage;
-exports.sopMessage = sopMessage;
-exports.availableMessage = availableMessage;
-exports.unavailableMessage = unavailableMessage;
+const groupIdMessage = (groupId) => {
+    var messages = 'Id group ini adalah :\n';
+    messages += groupId;
+    return messages;
+};
+
+module.exports = {
+    welcomeMessage: welcomeMessage,
+    helpMessage: helpMessage,
+    defaultMessage: defaultMessage,
+    byeMessage: byeMessage,
+    joinMessage: joinMessage,
+    reserveMessage: reserveMessage,
+    sopMessage: sopMessage,
+    availableMessage: availableMessage,
+    unavailableMessage: unavailableMessage,
+    groupIdMessage: groupIdMessage
+};
