@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const welcomeMessage = (firstName) => {
     return `Hello ${firstName}, terimakasih sudah add bot reservasi LP2.\nSilahkan kirim /help untuk info lebih lanjut`;
 };
@@ -53,13 +55,22 @@ const availableMessage = () => {
 };
 
 const unavailableMessage = (name, until) => {
-    var messages = 'LP2 sedang dipakai untuk ' + name + ' sampai ' + until;
+    var messages = `LP2 sedang dipakai untuk ${name} sampai ${until}`;
     return messages;
 };
 
 const groupIdMessage = (groupId) => {
-    var messages = 'Id group ini adalah :\n';
-    messages += groupId;
+    var messages = `Id group ini adalah :\n${groupId}`;
+    return messages;
+};
+
+const scheduleList = (schedules, date) => {
+    var messages = `Daftar kegiatan untuk tanggal ${date} :`;
+    _.forEach(schedules, (schedule) => {
+        messages += `\n\nNama    : ${schedule.nama_kegiatan}`;
+        messages += `\nMulai   : ${schedule.waktu_mulai}`;
+        messages += `\nSelesai : ${schedule.waktu_selesai}`;
+    });
     return messages;
 };
 
@@ -73,5 +84,6 @@ module.exports = {
     sopMessage: sopMessage,
     availableMessage: availableMessage,
     unavailableMessage: unavailableMessage,
-    groupIdMessage: groupIdMessage
+    groupIdMessage: groupIdMessage,
+    scheduleList: scheduleList
 };

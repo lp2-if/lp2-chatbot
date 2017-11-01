@@ -1,7 +1,7 @@
 const request = require('superagent');
-const lineClient = require('../../../../singleton/lineClient');
-const textGenerator = require('../../../../utils/textGenerator');
-const messageGenerator = require('../../../../utils/messageGenerator');
+const lineClient = require('../../../../../singleton/lineClient');
+const textGenerator = require('../../../../../utils/textGenerator');
+const messageGenerator = require('../../../../../utils/messageGenerator');
 
 module.exports = (event) => {
     const messages = [];

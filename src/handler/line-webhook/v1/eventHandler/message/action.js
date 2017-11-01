@@ -1,11 +1,10 @@
 const Bluebird = require('bluebird');
 const request = require('superagent');
-const _ = require('lodash');
 const satpam = require('satpam');
 
-const lineClient = require('../../../../singleton/lineClient');
-const textGenerator = require('../../../../utils/textGenerator');
-const messageGenerator = require('../../../../utils/messageGenerator');
+const lineClient = require('../../../../../singleton/lineClient');
+const textGenerator = require('../../../../../utils/textGenerator');
+const messageGenerator = require('../../../../../utils/messageGenerator');
 
 const reserve = (event) => {
     const messages = messageGenerator.text(textGenerator.reserveMessage());
@@ -22,10 +21,10 @@ const bye = (event) => {
     return lineClient.replyMessage(event.replyToken, messages)
         .then(() => {
             if (event.source.type == 'group') {
-                var groupId = event.source.groupId;
+                const groupId = event.source.groupId;
                 return lineClient.leaveGroup(groupId);
             }
-            var roomId = event.source.roomId;
+            const roomId = event.source.roomId;
             return lineClient.leaveRoom(roomId);
         });
 };
@@ -51,19 +50,11 @@ const date = (event) => {
     if (validationResult.success === false) {
         return lineClient.replyMessage(event.replyToken, messageGenerator.text('Format tanggal salah, gunakan format YYYY-MM-DD'));
     }
-    var url = 'http://reservasi.lp2.if.its.ac.id/reservasi/Laboratorium%20Pemrograman%202/';
-    url += date;
+    const url = `http://reservasi.lp2.if.its.ac.id/reservasi/Laboratorium%20Pemrograman%202/${date}`;
     return request.get(url)
         .then((result) => {
-            const messages = [];
             const scheduleList = result.body.kegiatan;
-            var scheduleMessage = 'Daftar kegiatan untuk tanggal ' + date + ':';
-            _.forEach(scheduleList, (schedule) => {
-                scheduleMessage += '\n\nNama : ' + schedule.nama_kegiatan;
-                scheduleMessage += '\nMulai   : ' + schedule.waktu_mulai;
-                scheduleMessage += '\nSelesai : ' + schedule.waktu_selesai;
-            });
-            messages.push(messageGenerator.text(scheduleMessage));
+            const messages = messageGenerator.text(textGenerator.scheduleList(scheduleList, date));
             return lineClient.replyMessage(event.replyToken, messages);
         })
         .catch(() => {
