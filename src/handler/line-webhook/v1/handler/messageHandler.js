@@ -31,6 +31,10 @@ module.exports = (event) => {
             return dateHandler(event);
         }
 
+        if (message.text.startsWith('/reserve')) {
+            return reservationHandler(event);
+        }
+
         if (message.text.startsWith('/admin/getid')) {
             return adminGetIdHandler(event);
         }
@@ -42,6 +46,11 @@ module.exports = (event) => {
     }
 
     return Bluebird.resolve(null);
+};
+
+const reservationHandler = (event) => {
+    const messages = messageGenerator.text(textGenerator.reserveMessage());
+    return client.replyMessage(event.replyToken, messages);
 };
 
 const dateHandler = (event) => {
