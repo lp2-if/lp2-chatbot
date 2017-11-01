@@ -63,7 +63,7 @@ const dateHandler = (event) => {
         .then((result) => {
             const messages = [];
             const scheduleList = result.body.kegiatan;
-            var scheduleMessage = messageGenerator.text('Daftar kegiatan untuk tanggal ' + date);
+            var scheduleMessage = 'Daftar kegiatan untuk tanggal ' + date + ':';
             _.forEach(scheduleList, (schedule) => {
                 scheduleMessage += '\nNama : ' + schedule.nama_kegiatan;
                 scheduleMessage += '\nMulai   : ' +schedule.waktu_mulai;
