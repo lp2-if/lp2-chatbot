@@ -45,7 +45,7 @@ module.exports = (event) => {
 };
 
 const dateHandler = (event) => {
-    const eventMessages = event.message;
+    const eventMessages = event.message.text;
     const date = eventMessages.split(' ', 2)[1];
     const rules = {
         date : ['date', 'dateFormat:YYYY-MM-DD']
