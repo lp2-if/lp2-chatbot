@@ -62,13 +62,12 @@ const dateHandler = (event) => {
     return request.get(url)
         .then((result) => {
             const messages = [];
-            messages.push(messageGenerator.text('Daftar kegiatan untuk tanggal ' + date));
             const scheduleList = result.body.kegiatan;
-            var scheduleMessage = '';
+            var scheduleMessage = messageGenerator.text('Daftar kegiatan untuk tanggal ' + date);
             _.forEach(scheduleList, (schedule) => {
-                scheduleMessage += '\nNama kegiatan : ' + schedule.nama_kegiatan;
-                scheduleMessage += '\nWaktu mulai   : ' +schedule.waktu_mulai;
-                scheduleMessage += '\nWaktu selesai : ' + schedule.waktu_selesai + '\n';
+                scheduleMessage += '\nNama : ' + schedule.nama_kegiatan;
+                scheduleMessage += '\nMulai   : ' +schedule.waktu_mulai;
+                scheduleMessage += '\nSelesai : ' + schedule.waktu_selesai + '\n';
             });
             messages.push(messageGenerator.text(scheduleMessage));
             return client.replyMessage(event.replyToken, messages);
