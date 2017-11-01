@@ -74,6 +74,11 @@ const scheduleList = (schedules, date) => {
     return messages;
 };
 
+const error = () => {
+    var messages = 'Oops ada kesalahan, silahkan coba lagi.';
+    return messages;
+};
+
 module.exports = {
     welcomeMessage: welcomeMessage,
     helpMessage: helpMessage,
@@ -85,5 +90,6 @@ module.exports = {
     availableMessage: availableMessage,
     unavailableMessage: unavailableMessage,
     groupIdMessage: groupIdMessage,
-    scheduleList: scheduleList
+    scheduleList: scheduleList,
+    error: error
 };

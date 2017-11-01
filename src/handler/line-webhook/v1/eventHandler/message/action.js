@@ -91,6 +91,9 @@ const getCurrentStatus = () => {
                 messages = textGenerator.unavailableMessage(result.nama_kegiatan, result.waktu_selesai_permohonan_peminjaman);
             }
             return Bluebird.resolve(messages);
+        })
+        .catch(() => {
+            return Bluebird.resolve(textGenerator.error());
         });
 };
 
