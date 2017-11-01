@@ -6,6 +6,7 @@ const helpMessage = () => {
     var messages = 'Berikut daftar perintah yang saat ini ada: ';
     messages += '\n/help untuk menampilkan daftar perintah';
     messages += '\n/reserve untuk melakukan reservasi';
+    messages += '\n/sop untuk melihat SOP peminjaman dan peraturan LP2';
     messages += '\n/now untuk mengecek apakah LP2 sedang digunakan';
     messages += '\n/date <YYYY-MM-DD> untuk mengecek jadwal LP2 pada tanggal tersebut';
     messages += '\n/bye untuk kick bot dari group';
@@ -34,6 +35,12 @@ const dummyMessage = () => {
     return messages;
 };
 
+const sopMessage = () => {
+    var messages = 'Klik link berikut untuk melihat SOP dan peraturan LP2';
+    messages += '\nilang.in/LP2SOP';
+    return messages;
+};
+
 const reserveMessage = () => {
     var messages = 'Silahkan gunakan link berikut untuk melakukan reservasi';
     messages += '\nhttp://reservasi.lp2.if.its.ac.id/pinjam';
@@ -46,3 +53,4 @@ exports.dummyMessage = dummyMessage;
 exports.byeMessage = byeMessage;
 exports.joinMessage = joinMessage;
 exports.reserveMessage = reserveMessage;
+exports.sopMessage = sopMessage;

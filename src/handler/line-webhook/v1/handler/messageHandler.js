@@ -27,6 +27,10 @@ module.exports = (event) => {
             return helpHandler(event);
         }
 
+        if (message.text.startsWith('/sop')) {
+            return sopHandler(event);
+        }
+
         if (message.text.startsWith('/date')) {
             return dateHandler(event);
         }
@@ -50,6 +54,11 @@ module.exports = (event) => {
 
 const reservationHandler = (event) => {
     const messages = messageGenerator.text(textGenerator.reserveMessage());
+    return client.replyMessage(event.replyToken, messages);
+};
+
+const sopHandler = (event) => {
+    const messages = messageGenerator.text(textGenerator.sopMessage());
     return client.replyMessage(event.replyToken, messages);
 };
 
