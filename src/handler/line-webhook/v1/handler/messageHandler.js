@@ -64,11 +64,12 @@ const dateHandler = (event) => {
             const messages = [];
             messages.push(messageGenerator.text('Daftar kegiatan untuk tanggal ' + date));
             const scheduleList = result.body.kegiatan;
+            var scheduleMessage = '';
             _.forEach(scheduleList, (schedule) => {
-                var partMessage = 'Nama kegiatan : ' + schedule.nama_kegiatan;
-                partMessage += '\nWaktu mulai   : ' +schedule.waktu_mulai;
-                partMessage += '\nWaktu selesai : ' + schedule.waktu_selesai;
-                messages.push(messageGenerator.text(partMessage));
+                scheduleMessage += 'Nama kegiatan : ' + schedule.nama_kegiatan;
+                scheduleMessage += '\nWaktu mulai   : ' +schedule.waktu_mulai;
+                scheduleMessage += '\nWaktu selesai : ' + schedule.waktu_selesai + '\n';
+                messages.push(messageGenerator.text(scheduleMessage));
             });
             return client.replyMessage(event.replyToken, messages);
         })
