@@ -34,7 +34,7 @@ const getId = (event) => {
         return Bluebird.resolve(null);
     }
     const messages = textGenerator.groupIdMessage(event.source.groupId);
-    return lineClient.replyMessage(event.replyToken, messages);
+    return lineClient.replyMessage(event.replyToken, messageGenerator.text(messages));
 };
 
 const date = (event) => {
