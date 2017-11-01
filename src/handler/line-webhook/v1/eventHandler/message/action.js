@@ -48,7 +48,8 @@ const date = (event) => {
     };
     const validationResult = satpam.validate(rules, input);
     if (validationResult.success === false) {
-        return lineClient.replyMessage(event.replyToken, messageGenerator.text('Format tanggal salah, gunakan format YYYY-MM-DD'));
+        // return lineClient.replyMessage(event.replyToken, messageGenerator.text('Format tanggal salah, gunakan format YYYY-MM-DD'));
+        return lineClient.replyMessage(event.replyToken, messageGenerator.text('The date format is wrong, please use the following format: YYYY-MM-DD'));
     }
     const url = `http://reservasi.lp2.if.its.ac.id/reservasi/Laboratorium%20Pemrograman%202/${date}`;
     return request.get(url)
