@@ -7,7 +7,7 @@
     "test": "./node_modules/eslint/bin/eslint.js --ext .js src/*",
     "start": "node ./src/index.js"
   },
-  "private" : true,
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lp2-if/lp2-chatbot.git"
@@ -29,6 +29,7 @@
     "dotenv": "~4.0.0",
     "express": "~4.16.2",
     "lodash": "~4.17.4",
+    "satpam": "^1.6.2",
     "superagent": "~3.8.0"
   },
   "devDependencies": {

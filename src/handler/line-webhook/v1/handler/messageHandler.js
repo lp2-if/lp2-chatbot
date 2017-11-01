@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const satpam = require('satpam');
 const Bluebird = require('bluebird');
 const line = require('@line/bot-sdk');
 const request = require('superagent');
@@ -26,6 +27,10 @@ module.exports = (event) => {
             return helpHandler(event);
         }
 
+        if (message.text.startsWith('/date')) {
+            return dateHandler(event);
+        }
+
         if (message.text.startsWith('/admin/getid')) {
             return adminGetIdHandler(event);
         }
@@ -37,6 +42,39 @@ module.exports = (event) => {
     }
 
     return Bluebird.resolve(null);
+};
+
+const dateHandler = (event) => {
+    const eventMessages = event.message;
+    const date = eventMessages.split(' ', 2)[1];
+    const rules = {
+        date : ['date', 'dateFormat:YYYY-MM-DD']
+    };
+    const input = {
+        date: date
+    };
+    const validationResult = satpam.validate(rules, input);
+    if (validationResult.success === false) {
+        return client.replyMessage(event.replyToken, messageGenerator.text('Format tanggal salah, gunakan format YYYY-MM-DD'));
+    }
+    var url = 'http://reservasi.lp2.if.its.ac.id/reservasi/Laboratorium%20Pemrograman%202/';
+    url += date;
+    return request.get(url)
+        .then((result) => {
+            const messages = [];
+            messages.push(messageGenerator.text('Daftar kegiatan untuk tanggal ' + date));
+            const scheduleList = result.body.kegiatan;
+            _.forEach(scheduleList, (schedule) => {
+                var partMessage = 'Nama kegiatan : ' + schedule.nama_kegiatan;
+                partMessage += '\nWaktu mulai   : ' +schedule.waktu_mulai;
+                partMessage += '\nWaktu selesai : ' + schedule.waktu_selesai;
+                messages.push(messageGenerator.text(partMessage));
+            });
+            return client.replyMessage(event.replyToken, messages);
+        })
+        .catch(() => {
+            return Bluebird.resolve(null);
+        });
 };
 
 const adminGetIdHandler = (event) => {
