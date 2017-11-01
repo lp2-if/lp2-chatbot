@@ -47,6 +47,16 @@ const reserveMessage = () => {
     return messages;
 };
 
+const availableMessage = () => {
+    var messages = 'LP2 sedang tidak dipakai, silahkan datang ke LP2. Jangan berisik dan meninggalkan sampah ya :)';
+    return messages;
+};
+
+const unavailableMessage = (name, until) => {
+    var messages = 'LP2 sedang dipakai untuk ' + name + ' sampai ' + until;
+    return messages;
+};
+
 exports.welcomeMessage = welcomeMessage;
 exports.helpMessage = helpMessage;
 exports.dummyMessage = dummyMessage;
@@ -54,3 +64,5 @@ exports.byeMessage = byeMessage;
 exports.joinMessage = joinMessage;
 exports.reserveMessage = reserveMessage;
 exports.sopMessage = sopMessage;
+exports.availableMessage = availableMessage;
+exports.unavailableMessage = unavailableMessage;

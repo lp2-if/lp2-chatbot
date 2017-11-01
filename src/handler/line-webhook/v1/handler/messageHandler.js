@@ -133,12 +133,12 @@ const helpHandler = (event) => {
 const getCurrentStatus = () => {
     return request.get('http://reservasi.lp2.if.its.ac.id/feeder/Laboratorium%20Pemrograman%202')
         .then((result) => {
-            result = result.body;
+            result = result.body.now[0];
             var messages = '';
-            if (result.now[0].jumlah == '0') {
-                messages = 'LP2 sedang tidak dipakai, silahkan datang ke LP2. Jangan berisik dan meninggalkan sampah ya :)';
+            if (result.jumlah == '0') {
+                messages = textGenerator.availableMessage();
             } else {
-                messages = 'LP2 sedang dipakai untuk ' + result.now[0].nama_kegiatan + ' sampai ' + result.now[0].waktu_selesai_permohonan_peminjaman;
+                messages = textGenerator.unavailableMessage(result.nama_kegiatan, result.waktu_selesai_permohonan_peminjaman);
             }
             return Bluebird.resolve(messages);
         });
