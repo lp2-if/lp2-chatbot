@@ -30,7 +30,7 @@ const joinMessage = () => {
     return messages;
 };
 
-const dummyMessage = () => {
+const defaultMessage = () => {
     var messages = 'Send /help to display the list of commands';
     messages += '\nPlease do not litter :)';
     messages += "\nAnd also tidy up the chairs too ;)";
