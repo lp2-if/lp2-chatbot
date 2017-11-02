@@ -18,7 +18,7 @@ const helpMessage = () => {
 
 const byeMessage = () => {
     var messages = 'Good Bye!';
-    messages += "\nDon't forget to attend your class :p";
+    messages += '\nDon\'t forget to attend your class :p';
     return messages;
 };
 
@@ -33,7 +33,7 @@ const joinMessage = () => {
 const defaultMessage = () => {
     var messages = 'Send /help to display the list of commands';
     messages += '\nPlease do not litter :)';
-    messages += "\nAnd also tidy up the chairs too ;)";
+    messages += '\nAnd also tidy up the chairs too ;)';
     messages += '\nBe productive today!';
     return messages;
 };
@@ -51,7 +51,7 @@ const reserveMessage = () => {
 };
 
 const availableMessage = () => {
-    var messages = "LP2 is currently available, you are welcome to visit. Don't be noisy and keep LP2 clean :)";
+    var messages = 'LP2 is currently available, you are welcome to visit. Don\'t be noisy and keep LP2 clean :)';
     return messages;
 };
 
@@ -76,8 +76,13 @@ const scheduleList = (schedules, date) => {
     return messages;
 };
 
+const dateInvalid = () => {
+    var messages = 'Make sure your date variable is correct, use YYYY-MM-DD format';
+    return messages;
+};
+
 const error = () => {
-    var messages = 'Oops there is a mistake, please try again.';
+    var messages = 'Oops something wrong, please try again.';
     return messages;
 };
 
@@ -93,5 +98,6 @@ module.exports = {
     unavailableMessage: unavailableMessage,
     groupIdMessage: groupIdMessage,
     scheduleList: scheduleList,
-    error: error
+    error: error,
+    dateInvalid: dateInvalid
 };

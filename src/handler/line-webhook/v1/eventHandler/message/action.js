@@ -41,14 +41,14 @@ const date = (event) => {
     const eventMessages = event.message.text;
     const date = eventMessages.split(' ', 2)[1];
     const rules = {
-        date: ['date', 'dateFormat:YYYY-MM-DD']
+        date: ['required', 'date', 'dateFormat:YYYY-MM-DD']
     };
     const input = {
         date: date
     };
     const validationResult = satpam.validate(rules, input);
     if (validationResult.success === false) {
-        return lineClient.replyMessage(event.replyToken, messageGenerator.text('The date format is wrong, please use the following format: YYYY-MM-DD'));
+        return lineClient.replyMessage(event.replyToken, messageGenerator.text(textGenerator.dateInvalid()));
     }
     const url = `http://reservasi.lp2.if.its.ac.id/reservasi/Laboratorium%20Pemrograman%202/${date}`;
     return request.get(url)
@@ -58,7 +58,7 @@ const date = (event) => {
             return lineClient.replyMessage(event.replyToken, messages);
         })
         .catch(() => {
-            return Bluebird.resolve(null);
+            return lineClient.replyMessage(event.replyToken, textGenerator.error());
         });
 };
 
