@@ -58,7 +58,7 @@ const date = (event) => {
             return lineClient.replyMessage(event.replyToken, messages);
         })
         .catch(() => {
-            return lineClient.replyMessage(event.replyToken, textGenerator.error());
+            return lineClient.replyMessage(event.replyToken, messageGenerator.text(textGenerator.error()));
         });
 };
 
