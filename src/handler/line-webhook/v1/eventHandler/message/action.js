@@ -69,7 +69,7 @@ const acc = (event) => {
         })
         .then((result) => {
             const messages = result.body.message;
-            return lineClient.replyMessage(event.replyToken, messages);
+            return lineClient.replyMessage(event.replyToken, messageGenerator.text(messages));
         })
         .catch((error) => {
             console.error(error);
