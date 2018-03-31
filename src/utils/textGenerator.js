@@ -83,7 +83,7 @@ const dateInvalid = () => {
 
 const accInvalid = () => {
     var messages = 'Make sure your command is correct, "/admin/acc [resrvation_code] [username]"';
-    messages += '/nThis command can only be used in LP2 admin group';
+    messages += '\nThis command can only be used in LP2 admin group';
     return messages;
 };
 

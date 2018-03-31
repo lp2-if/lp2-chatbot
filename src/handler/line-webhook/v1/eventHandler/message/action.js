@@ -71,7 +71,8 @@ const acc = (event) => {
             const messages = result.body.message;
             return lineClient.replyMessage(event.replyToken, messages);
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error(error);
             return lineClient.replyMessage(event.replyToken, messageGenerator.text(textGenerator.error()));
         });
 };
