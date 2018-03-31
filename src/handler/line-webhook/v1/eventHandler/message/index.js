@@ -33,6 +33,10 @@ module.exports = (event) => {
         if (message.text.startsWith('/admin/getid')) {
             return action.getId(event);
         }
+
+        if (message.text.startsWith('/admin/acc')) {
+            return action.acc(event);
+        }
     }
 
     if (event.source.type == 'user') {

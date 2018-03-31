@@ -6,6 +6,10 @@ const lineClient = require('../../../../../singleton/lineClient');
 const textGenerator = require('../../../../../utils/textGenerator');
 const messageGenerator = require('../../../../../utils/messageGenerator');
 
+const adminGroupId = process.env.ADMIN_GROUP_ID;
+const apiRoute = process.env.API_ROUTE;
+const reservationSecret = process.env.RESERVATION_SECRET;
+
 const reserve = (event) => {
     const messages = messageGenerator.text(textGenerator.reserveMessage());
     return lineClient.replyMessage(event.replyToken, messages);
@@ -35,6 +39,41 @@ const getId = (event) => {
     }
     const messages = textGenerator.groupIdMessage(event.source.groupId);
     return lineClient.replyMessage(event.replyToken, messageGenerator.text(messages));
+};
+
+const acc = (event) => {
+    if (event.source.type != 'group' || event.source.groupId !== adminGroupId) {
+        return Bluebird.resolve(null);
+    }
+    const eventMessages = event.message.text;
+    const reservationCode = eventMessages.split(' ', 3)[1];
+    const username = eventMessages.split(' ', 3)[2];
+    const rules = {
+        reservationCode: ['required'],
+        username: ['required']
+    };
+    const input = {
+        reservationCode: reservationCode,
+        username: username
+    };
+    const validationResult = satpam.validate(rules, input);
+    if (validationResult.success == false){
+        return lineClient.replyMessage(event.replyToken, messageGenerator.text(textGenerator.accInvalid()));
+    }
+    const url = `http://reservasi.lp2.if.its.ac.id/${apiRoute}/acc`;
+    return request.post(url)
+        .send({
+            kode_permohonan: reservationCode,
+            username: username,
+            secret: reservationSecret
+        })
+        .then((result) => {
+            const messages = result.body.message;
+            return lineClient.replyMessage(event.replyToken, messages);
+        })
+        .catch(() => {
+            return lineClient.replyMessage(event.replyToken, messageGenerator.text(textGenerator.error()));
+        });
 };
 
 const date = (event) => {
@@ -105,5 +144,6 @@ module.exports = {
     getId: getId,
     date: date,
     help: help,
+    acc: acc,
     defaultResponse: defaultResponse
 };
